@@ -8,20 +8,22 @@ import {
 } from "../../utilities/databaseManager";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import happyImage from "../../images/giphy.gif";
 
 const Review = () => {
   const [cart, setCart] = useState([]);
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  const handlePlaceOrder = () => {
+  let navigate = useNavigate();
+  const handleProceedCheckout = () => {
     // cart reset / make empty.
-    setCart([]);
-    setOrderPlaced(true);
-
-    //database clean
-    processOrder();
+    // setCart([]);
+    // setOrderPlaced(true);
+    // //database clean
+    // processOrder();
+    // now move to a different route.
+    navigate("/shipment");
   };
 
   const handleRemoveProduct = (productKey) => {
@@ -65,11 +67,11 @@ const Review = () => {
       </div>
       <div className="cart-container">
         <Cart cart={cart}>
-          <Link to="/review">
-            <button className="main-button" onClick={handlePlaceOrder}>
-              Place Order
-            </button>
-          </Link>
+          {/* <Link to="/review"> */}
+          <button className="main-button" onClick={handleProceedCheckout}>
+            Proceed Checkout
+          </button>
+          {/* </Link> */}
         </Cart>
       </div>
     </div>
